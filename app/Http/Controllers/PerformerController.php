@@ -103,8 +103,12 @@ class PerformerController extends Controller
     public function destroy($id)
     {
         $performer = Performer::find($id);
-        $performer->delete();
 
-        return redirect('/performer')->with('success', 'Performer has been deleted Successfully');
+        if (!is_null($performer)) {
+            $performer->delete();
+            return response()->json(['code' => 0, 'msg' => 'Performer deleted successfully.']);
+        } else {
+            return response()->json(['code' => 1, 'msg' => 'Performer not found.']);
+        }
     }
 }

@@ -29,11 +29,7 @@
             <td>{{$row->position}}</td>
             <td><a href="{{ route('performer.edit',$row->id)}}" class="btn btn-primary">Редактировать</a></td>
             <td>
-                <form action="{{ route('performer.destroy', $row->id)}}" method="post">
-                  @csrf
-                  @method('DELETE')
-                  <button class="btn btn-danger" type="submit">Удалить</button>
-                </form>
+                <button class="btn btn-danger" type="submit" del-url="{{ route('performer.destroy', $row->id)}}">Удалить</button>
             </td>
         </tr>
         @endforeach
