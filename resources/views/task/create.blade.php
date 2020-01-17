@@ -19,9 +19,9 @@
         <div class="form-group">
           <label for="status">Статус:</label>
           <select class="form-control" id="status" name="status" required>
-            <option value="open">Открыта</option>
-            <option value="in_progress">В работе</option>
-            <option value="complete">Завершена</option>
+            <option value="open">{{__('statuses.open')}}</option>
+            <option value="in_progress">{{__('statuses.in_progress')}}</option>
+            <option value="complete">{{__('statuses.complete')}}</option>
           </select>
         </div>
         <div class="form-group">

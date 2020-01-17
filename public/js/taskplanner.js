@@ -92,6 +92,8 @@ ajaxFormStuff = {
                     new jBox('Modal', {
                         attach: $(this),
                         title: title,
+                        width: 500,
+                        responsiveWidth: true,
                         ajax: {
                             url: url,
                             reload: false,

@@ -19,9 +19,9 @@
         <div class="form-group">
           <label for="status">Статус:</label>
           <select class="form-control" id="status" name="status" required>
-            <option value="open" @if($task->status == 'open') selected @endif>Открыта</option>
-            <option value="in_progress" @if($task->status == 'in_progress') selected @endif>В работе</option>
-            <option value="complete" @if($task->status == 'complete') selected @endif>Завершена</option>
+            <option value="open" @if($task->status == 'open') selected @endif>{{__('statuses.open')}}</option>
+            <option value="in_progress" @if($task->status == 'in_progress') selected @endif>{{__('statuses.in_progress')}}</option>
+            <option value="complete" @if($task->status == 'complete') selected @endif>{{__('statuses.complete')}}</option>
           </select>
         </div>
         <div class="form-group">

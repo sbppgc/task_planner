@@ -46,7 +46,7 @@ class PerformerController extends Controller
         ]);
         $performer->save();
 
-        return response()->json(['code' => 0, 'msg' => 'Performer added.']);
+        return response()->json(['code' => 0, 'msg' => __('messages.performer_added')]);
     }
 
     /**
@@ -92,7 +92,7 @@ class PerformerController extends Controller
         $performer->position = $request->get('position');
         $performer->save();
 
-        return response()->json(['code' => 0, 'msg' => 'Performer has been updated.']);
+        return response()->json(['code' => 0, 'msg' => __('messages.performer_updated')]);
     }
 
     /**
@@ -107,9 +107,9 @@ class PerformerController extends Controller
 
         if (!is_null($performer)) {
             $performer->delete();
-            return response()->json(['code' => 0, 'msg' => 'Performer has been deleted successfully.']);
+            return response()->json(['code' => 0, 'msg' => __('messages.performer_deleted')]);
         } else {
-            return response()->json(['code' => 1, 'msg' => 'Performer is not found.']);
+            return response()->json(['code' => 1, 'msg' => __('messages.performer_not_found')]);
         }
     }
 }

@@ -54,7 +54,7 @@ class TaskController extends Controller
         ]);
         $task->save();
 
-        return response()->json(['code' => 0, 'msg' => 'Task added.']);
+        return response()->json(['code' => 0, 'msg' => __('messages.task_added')]);
     }
 
     /**
@@ -106,7 +106,7 @@ class TaskController extends Controller
 
         $task->save();
 
-        return response()->json(['code' => 0, 'msg' => 'Task has been updated.']);
+        return response()->json(['code' => 0, 'msg' => __('messages.task_updated')]);
     }
 
     /**
@@ -121,9 +121,9 @@ class TaskController extends Controller
 
         if (!is_null($task)) {
             $task->delete();
-            return response()->json(['code' => 0, 'msg' => 'Task has been deleted successfully.']);
+            return response()->json(['code' => 0, 'msg' => __('messages.task_deleted')]);
         } else {
-            return response()->json(['code' => 1, 'msg' => 'Task is not found.']);
+            return response()->json(['code' => 1, 'msg' => __('messages.task_not_found')]);
         }
     }
 }

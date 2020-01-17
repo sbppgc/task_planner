@@ -36,7 +36,7 @@
             <td>{{$row->id}}</td>
             <td>{{$row->name}}</td>
             <td>{{$row->performer->name}}</td>
-            <td>{{$row->status}}</td>
+            <td>{{__('statuses.'.$row->status)}}</td>
             <td>{{$row->description}}</td>
             <td>
                 <button class="btn btn-primary" type="button" data-form-url="{{ route('task.edit',$row->id)}}" data-dlg-title="Редактировать задачу">Редактировать</button>
