@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Performer;
 use App\Task;
 use Illuminate\Http\Request;
 
@@ -25,7 +26,8 @@ class TaskController extends Controller
      */
     public function create()
     {
-        return view('task.create');
+        $performers = Performer::All();
+        return view('task.create', compact('performers'));
     }
 
     /**
@@ -49,7 +51,8 @@ class TaskController extends Controller
             'description' => $request->get('description'),
         ]);
         $task->save();
-        return redirect('/task')->with('success', 'Task has been added');
+
+        return response()->json(['code' => 0, 'msg' => 'Task added.']);
     }
 
     /**
@@ -72,8 +75,9 @@ class TaskController extends Controller
     public function edit($id)
     {
         $task = Task::find($id);
+        $performers = Performer::All();
 
-        return view('task.edit', compact('task'));
+        return view('task.edit', compact('task', 'performers'));
     }
 
     /**
@@ -100,7 +104,7 @@ class TaskController extends Controller
 
         $task->save();
 
-        return redirect('/task')->with('success', 'Task has been updated');
+        return response()->json(['code' => 0, 'msg' => 'Task has been updated.']);
     }
 
     /**
@@ -112,8 +116,12 @@ class TaskController extends Controller
     public function destroy($id)
     {
         $task = Task::find($id);
-        $task->delete();
 
-        return redirect('/task')->with('success', 'Task has been deleted Successfully');
+        if (!is_null($task)) {
+            $task->delete();
+            return response()->json(['code' => 0, 'msg' => 'Task has been deleted successfully.']);
+        } else {
+            return response()->json(['code' => 1, 'msg' => 'Task is not found.']);
+        }
     }
 }

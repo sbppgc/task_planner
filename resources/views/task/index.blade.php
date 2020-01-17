@@ -1,17 +1,21 @@
 @extends('layout')
 
 @section('content')
-<style>
-  .uper {
-    margin-top: 40px;
-  }
-</style>
-<div class="uper">
+
+<div class="row text-center">
+  <div class="col">
+    <h1>Исполнители</h1>
+  </div>
+</div>
+
+
+<div class="row">
   @if(session()->get('success'))
     <div class="alert alert-success">
       {{ session()->get('success') }}
     </div><br />
   @endif
+  @if($rows->count() > 0)
   <table class="table table-striped">
     <thead>
         <tr>
@@ -31,17 +35,27 @@
             <td>{{$row->id_performer}}</td>
             <td>{{$row->status}}</td>
             <td>{{$row->description}}</td>
-            <td><a href="{{ route('task.edit',$row->id)}}" class="btn btn-primary">Редактировать</a></td>
             <td>
-                <form action="{{ route('task.destroy', $row->id)}}" method="post">
-                  @csrf
-                  @method('DELETE')
-                  <button class="btn btn-danger" type="submit">Удалить</button>
-                </form>
+                <button class="btn btn-primary" type="button" data-form-url="{{ route('task.edit',$row->id)}}" data-dlg-title="Редактировать задачу">Редактировать</button>
+                <button class="btn btn-danger" type="button" data-del-url="{{ route('task.destroy', $row->id)}}" data-confirm-text="Точно удалить?">Удалить</button>
             </td>
         </tr>
         @endforeach
     </tbody>
   </table>
-<div>
+  @else
+      <p>Задач пока нет</p>
+  @endif
+
+</div>
+<div class="row text-right">
+  <div class="col">
+    <button type="button" class="btn btn-primary" data-form-url="{{ route('task.create')}}" data-dlg-title="Добавить задачу">Добавить</button>
+  </div>
+</div>
+
+<div style="display: none" id="resultBox">
+  <div id="resultBoxMsg"></div>
+  <button type="button" id="resultBoxCloseBtn" class="btn btn-info btn-block">OK</button>
+</div>
 @endsection

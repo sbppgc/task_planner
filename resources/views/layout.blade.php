@@ -13,6 +13,12 @@
     @yield('content')
   </div>
   <script src="{{ asset('js/app.js') }}" type="text/javascript"></script>
+
+  <script src="https://cdn.jsdelivr.net/gh/StephanWagner/jBox@v1.0.6/dist/jBox.all.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/gh/StephanWagner/jBox@v1.0.6/dist/jBox.all.min.css" rel="stylesheet">
+
   <script src="{{ asset('js/taskplanner.js') }}" type="text/javascript"></script>
+  <link href="{{ asset('css/taskplanner.css') }}" rel="stylesheet">
+
 </body>
 </html>

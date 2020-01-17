@@ -1,45 +1,35 @@
-@extends('layout')
+@extends('dlg_layout')
 
 @section('content')
-<style>
-  .uper {
-    margin-top: 40px;
-  }
-</style>
-<div class="card uper">
-  <div class="card-header">
-    Edit Task
-  </div>
-  <div class="card-body">
-    @if ($errors->any())
-      <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-              <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-      </div><br />
-    @endif
-      <form method="post" action="{{ route('task.update', $task->id) }}">
-        @method('PATCH')
-        @csrf
+<div class="row">
+  <div class="col">
+      <form method="post" data-method="PATCH" action="{{ route('task.update', $task->id) }}">
         <div class="form-group">
           <label for="name">Название:</label>
-          <input type="text" class="form-control" name="name" value={{ $task->name }} />
+          <input type="text" class="form-control" name="name" value="{{ $task->name }}" />
         </div>
         <div class="form-group">
           <label for="id_performer">Исполнитель:</label>
-          <input type="text" class="form-control" name="id_performer" value={{ $task->id_performer }} />
+          <select class="form-control" id="id_performer" name="id_performer" required>
+            @foreach($performers as $performer)
+              <option value="{{ $performer->id }}" {{ $performer->id == $task->id_performer ? 'selected' : ''}}>{{ $performer->name }}</option>
+            @endforeach
+          </select>
         </div>
         <div class="form-group">
           <label for="status">Статус:</label>
-          <input type="text" class="form-control" name="status" value={{ $task->status }} />
+          <select class="form-control" id="status" name="status" required>
+            <option value="open" @if($task->status == 'open') selected @endif>Открыта</option>
+            <option value="in_progress" @if($task->status == 'in_progress') selected @endif>В работе</option>
+            <option value="complete" @if($task->status == 'complete') selected @endif>Завершена</option>
+          </select>
         </div>
         <div class="form-group">
           <label for="description">Описание:</label>
-          <input type="text" class="form-control" name="description" value={{ $task->description }} />
+          <textarea type="text" class="form-control" id="description" name="description">{{ $task->description }}</textarea>
         </div>
-        <button type="submit" class="btn btn-primary">Update</button>
+        <button type="button" class="btn btn-danger btn-block" data-purpose='cancel'>Отмена</button>
+        <button type="submit" class="btn btn-primary btn-block" data-purpose='submit'>Сохранить</button>
       </form>
   </div>
 </div>

@@ -1,0 +1,7 @@
+body > div:first-of-type {
+    margin-top: 20px;
+}
+
+#resultBoxMsg{
+    margin: 20px;
+}

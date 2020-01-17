@@ -1,44 +1,35 @@
-@extends('layout')
+@extends('dlg_layout')
 
 @section('content')
-<style>
-  .uper {
-    margin-top: 40px;
-  }
-</style>
-<div class="card uper">
-  <div class="card-header">
-    Add Task
-  </div>
-  <div class="card-body">
-    @if ($errors->any())
-      <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-              <li>{{ $error }}</li>
+<div class="row">
+  <div class="col">
+      <form method="post" data-method="POST" action="{{ route('task.store') }}">
+        <div class="form-group">
+          <label for="name">Название:</label>
+          <input type="text" class="form-control" id="name" name="name" required />
+        </div>
+        <div class="form-group">
+          <label for="id_performer">Исполнитель:</label>
+          <select class="form-control" id="id_performer" name="id_performer" required>
+            @foreach($performers as $performer)
+              <option value="{{ $performer->id }}">{{ $performer->name }}</option>
             @endforeach
-        </ul>
-      </div><br />
-    @endif
-      <form method="post" action="{{ route('task.store') }}">
-          <div class="form-group">
-              @csrf
-              <label for="name">Название:</label>
-              <input type="text" class="form-control" name="name"/>
-          </div>
-          <div class="form-group">
-              <label for="id_performer">Исполнитель:</label>
-              <input type="text" class="form-control" name="id_performer"/>
-          </div>
-          <div class="form-group">
-              <label for="status">Статус:</label>
-              <input type="text" class="form-control" name="status"/>
-          </div>
-          <div class="form-group">
-              <label for="description">Описание:</label>
-              <input type="text" class="form-control" name="description"/>
-          </div>
-          <button type="submit" class="btn btn-primary">Добавить</button>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="status">Статус:</label>
+          <select class="form-control" id="status" name="status" required>
+            <option value="open">Открыта</option>
+            <option value="in_progress">В работе</option>
+            <option value="complete">Завершена</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="description">Описание:</label>
+          <textarea type="text" class="form-control" id="description" name="description"></textarea>
+        </div>
+        <button type="button" class="btn btn-danger btn-block" data-purpose='cancel'>Отмена</button>
+        <button type="submit" class="btn btn-primary btn-block" data-purpose='submit'>Добавить</button>
 
       </form>
   </div>
