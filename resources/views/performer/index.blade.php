@@ -2,11 +2,14 @@
 
 @section('content')
 
-<div class="row text-center">
-  <div class="col">
-    <h1>Исполнители</h1>
-  </div>
-</div>
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a class="nav-link" href="{{ route('task.index')}}">Задачи</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link active" href="{{ route('performer.index')}}">Исполнители</a>
+  </li>
+</ul>
 
 
 <div class="row">
@@ -19,10 +22,10 @@
     <table class="table table-striped">
       <thead>
           <tr>
-            <td>ID</td>
-            <td>Имя</td>
-            <td>Должность</td>
-            <td>Действия</td>
+            <td class="border-top-0">ID</td>
+            <td class="border-top-0">Имя</td>
+            <td class="border-top-0">Должность</td>
+            <td class="border-top-0">Действия</td>
           </tr>
       </thead>
       <tbody>
