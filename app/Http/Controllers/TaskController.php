@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +16,8 @@ class TaskController extends Controller
      */
     public function index()
     {
-        $rows = Task::All();
+        $rows = Task::with('performer')->get();
+
         return view('task.index', compact('rows'));
     }
 
@@ -40,13 +42,13 @@ class TaskController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'id_performer' => 'required',
+            'performer_id' => 'required',
             'status' => 'required',
             'description' => 'required',
         ]);
         $task = new Task([
             'name' => $request->get('name'),
-            'id_performer' => $request->get('id_performer'),
+            'performer_id' => $request->get('performer_id'),
             'status' => $request->get('status'),
             'description' => $request->get('description'),
         ]);
@@ -91,14 +93,14 @@ class TaskController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'id_performer' => 'required',
+            'performer_id' => 'required',
             'status' => 'required',
             'description' => 'required',
         ]);
 
         $task = Task::find($id);
         $task->name = $request->get('name');
-        $task->id_performer = (int) $request->get('id_performer');
+        $task->performer_id = (int) $request->get('performer_id');
         $task->status = $request->get('status');
         $task->description = $request->get('description');
 

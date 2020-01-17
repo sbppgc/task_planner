@@ -32,7 +32,7 @@
         <tr>
             <td>{{$row->id}}</td>
             <td>{{$row->name}}</td>
-            <td>{{$row->id_performer}}</td>
+            <td>{{$row->performer->name}}</td>
             <td>{{$row->status}}</td>
             <td>{{$row->description}}</td>
             <td>

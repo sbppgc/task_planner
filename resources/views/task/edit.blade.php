@@ -9,10 +9,10 @@
           <input type="text" class="form-control" name="name" value="{{ $task->name }}" />
         </div>
         <div class="form-group">
-          <label for="id_performer">Исполнитель:</label>
-          <select class="form-control" id="id_performer" name="id_performer" required>
+          <label for="performer_id">Исполнитель:</label>
+          <select class="form-control" id="performer_id" name="performer_id" required>
             @foreach($performers as $performer)
-              <option value="{{ $performer->id }}" {{ $performer->id == $task->id_performer ? 'selected' : ''}}>{{ $performer->name }}</option>
+              <option value="{{ $performer->id }}" {{ $performer->id == $task->performer_id ? 'selected' : ''}}>{{ $performer->name }}</option>
             @endforeach
           </select>
         </div>
